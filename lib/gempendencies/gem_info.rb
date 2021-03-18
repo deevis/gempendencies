@@ -35,7 +35,7 @@ module Gempendencies
     def initialize
       @domain_badge_labels = {}
       # note - be sure to double backslash all the CLI backslashes
-      if File.exist?("gem_info.txt")
+      if File.exist?(".gempendencies/gem_info.txt")
         github_urls
       else
         "You need to generate gem_info.txt - GemInfo.new.build_gem_info_txt"
@@ -50,7 +50,7 @@ module Gempendencies
     end
 
     def github_urls
-      @github_urls = `grep "Homepage:" gem_info.txt | grep "github" | sed 's/.*page: \\(.*\\)/\\1/g'`.split("\n").uniq
+      @github_urls = `grep "Homepage:" .gempendencies/gem_info.txt | grep "github" | sed 's/.*page: \\(.*\\)/\\1/g'`.split("\n").uniq
       #puts @github_urls
       puts "Got #{@github_urls.length} github urls to process"
       @github_urls
@@ -131,7 +131,7 @@ module Gempendencies
         if owner && repo
           url = "https://api.github.com/repos/#{owner}/#{repo}"
           # puts "#{owner} - #{repo}   :  #{url}"
-          directory = "gem_info/#{owner}/#{repo}"
+          directory = ".gempendencies/#{owner}/#{repo}"
           `mkdir -p #{directory}`
           file = "#{directory}/curl_result.json"
           

@@ -8,7 +8,8 @@ require 'rubygems'
 begin
   require 'bundler'
   Bundler.setup
-rescue StandardError
+rescue StandardError => e
+  puts "ERROR: #{e.message}"
 end
 
 here = File.expand_path(File.dirname __FILE__)
