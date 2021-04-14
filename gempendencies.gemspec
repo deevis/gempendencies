@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 #  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   spec.files = ["bin/gempendencies", "bin/generate_gem_info.sh", "README.md"] + Dir["lib/**/*"]
-  spec.executables = ["gempendencies", "generate_gem_info.sh"]
+  spec.executables = ["gempendencies"]
 
   spec.require_paths = ["lib"]
 
