@@ -4,6 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'set'
 require 'securerandom'
+require 'yaml'
 
 module Gempendencies
 
