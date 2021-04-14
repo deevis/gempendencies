@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Darren Hicks"]
   spec.email         = ["darren.hicks@gmail.com"]
 
-  spec.summary       = %q{Builds a comprehensive list of gems used by your project}
-  spec.description   = %q{Builds a comprehensive list of gems used by your project}
+  spec.summary       = %q{Builds a comprehensive list of gems used by your project and summarizes the OSS Licenses being used}
+  spec.description   = %q{Builds a comprehensive list of gems used by your project and summarizes the OSS Licenses being used}
   spec.homepage      = "https://github.com/deevis/gempendencies"
   spec.license       = "MIT"
 
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = "https://github.com/deevis/gempendencies"
 #  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
-  spec.files = ["bin/gempendencies", "bin/generate_gem_info.sh", "README.md"] + Dir["lib/**/*"]
+  spec.files = ["bin/gempendencies", "README.md"] + Dir["lib/**/*"]
   spec.executables = ["gempendencies"]
 
   spec.require_paths = ["lib"]
