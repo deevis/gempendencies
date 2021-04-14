@@ -159,6 +159,41 @@ module Gempendencies
       contents
     end
 
+    def aggregate
+      data = {}
+      total_counts = Hash.new(0)
+      puts "Searching recursively for nested .gempendencies to aggregate"
+      paths = `find . -iname "license_info.yaml"`
+      paths.split("\n").each do |path|
+        "./business_rules/.gempendencies/license_info.yaml"
+        puts path
+        project_name = path.match(/.\/(.*)\/\.gem.*/)[1]
+        licenses = YAML.load_file(path)
+        data[project_name] = licenses
+        licenses.each do |name, count|
+          total_counts[name] += count
+        end
+      end
+      data['TOTALS'] = total_counts
+      # order output columns by most common license 
+      puts "-" * 60
+      puts "       Start CSV output"
+      puts "-" * 60
+      columns = Hash[total_counts.sort{|a,b| b[1] <=> a[1]}].keys
+      puts (['project'] + columns).join(',')
+      data.each do |project_name, counts|
+        print project_name
+        columns.each do |col|
+          print ','
+          print counts[col]
+        end
+        puts 
+      end
+      puts "-" * 60
+      puts "       End CSV output"
+      puts "-" * 60
+    end
+
     def build(load_github_metadata = false)
       if !File.exist?(".gempendencies/gem_info.yaml")
         build_gem_info_txt

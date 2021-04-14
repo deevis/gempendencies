@@ -1,21 +1,22 @@
 #!/usr/bin/env ruby
 
-unless File.exist?('./Rakefile') || File.exist?('./Gemfile')
-  abort 'Please run gempendencies from the root of the project.'
-end
+# unless File.exist?('./Rakefile') || File.exist?('./Gemfile')
+#   abort 'Please run gempendencies from the root of the project.'
+# end
 
 require 'rubygems'
-begin
-  require 'bundler'
-  Bundler.setup
-rescue StandardError => e
-  puts "ERROR: #{e.message}"
-end
+require 'gempendencies'
+require 'gempendencies/gem_info'
 
 here = File.expand_path(File.dirname __FILE__)
 $LOAD_PATH << "#{here}/../lib"
 
-require 'gempendencies'
-require 'gempendencies/gem_info'
-
-Gempendencies::GemInfo.new.build
+begin
+  require 'bundler'
+  Bundler.setup
+  # If we're in a Bundler-managed project, then build the information for it
+  Gempendencies::GemInfo.new.build
+rescue StandardError => e
+  # Otherwise, look for nested projects that have .gempendencies info and aggregate it
+  Gempendencies::GemInfo.new.aggregate
+end
